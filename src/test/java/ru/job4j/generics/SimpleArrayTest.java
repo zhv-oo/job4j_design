@@ -72,6 +72,7 @@ public class SimpleArrayTest {
         assertTrue(iter.hasNext());
         assertEquals(iter.next(), "1");
         assertEquals(iter.next(), "2");
+        assertNull(iter.next());
         assertEquals(iter.next(), "4");
         assertFalse(iter.hasNext());
     }

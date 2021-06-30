@@ -17,22 +17,17 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void set(int index, T model) {
-        if (Objects.checkIndex(index, pos) == index) {
-            data[index] = model;
-        }
+            data[Objects.checkIndex(index, pos)] = model;
     }
     public void remove(int index) {
-        if (Objects.checkIndex(index, pos) == index) {
-           System.arraycopy(data, index + 1, data, index, data.length - index - 1);
+        int itemPos = Objects.checkIndex(index, pos);
+           System.arraycopy(data, itemPos + 1, data, itemPos, data.length - itemPos - 1);
            pos--;
-        }
     }
 
     public T get(int index) {
         T rsl = null;
-        if (Objects.checkIndex(index, pos) == index) {
-           rsl = (T) data[index];
-        }
+           rsl = (T) data[Objects.checkIndex(index, pos)];
         return rsl;
     }
 
@@ -49,14 +44,10 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public T next() {
-                T rsl = null;
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                while (rsl == null) {
-                    rsl = (T) data[position++];
-                }
-                return rsl;
+                return (T) data[position++];
             }
         };
     }
