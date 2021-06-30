@@ -13,7 +13,13 @@ public class EvenIt implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return this.getPos() != -1;
+        while (pos < numbers.length) {
+            if (this.numbers[pos] % 2 == 0) {
+                break;
+            }
+            pos++;
+        }
+        return pos < numbers.length;
     }
 
     @Override
@@ -21,18 +27,6 @@ public class EvenIt implements Iterator {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        this.pos = this.getPos();
         return numbers[pos++];
-    }
-
-    private int getPos() {
-        int rsl = -1;
-        for (int i = pos; i < this.numbers.length; i++) {
-            if (this.numbers[i] % 2 == 0) {
-                rsl = i;
-                break;
-            }
-        }
-        return  rsl;
     }
 }
