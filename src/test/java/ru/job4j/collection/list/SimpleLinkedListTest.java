@@ -18,6 +18,16 @@ public class SimpleLinkedListTest {
         assertThat(list.get(1), Is.is(2));
     }
 
+    @Test
+    public void whenAddAndGetTwo() {
+        List<Integer> list = new SimpleLinkedList<>();
+        list.add(1);
+        list.add(2);
+        assertThat(list.get(0), Is.is(1));
+        list.add(3);
+        assertThat(list.get(2), Is.is(3));
+    }
+
     @Test(expected = IndexOutOfBoundsException.class)
     public void whenGetFromOutOfBoundThenExceptionThrown() {
         List<Integer> list = new SimpleLinkedList<>();
