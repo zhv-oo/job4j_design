@@ -51,7 +51,7 @@ public class ListUtilsTest {
         List<Integer> input = new ArrayList<>(Arrays.asList(0, 1, 2));
         ListUtils.addAfter(input, 2, 3);
         ListUtils.replaceIf(input, obj -> obj > 1, 0);
-        assertThat(Arrays.asList(0, 1, 0 , 0), Is.is(input));
+        assertThat(Arrays.asList(0, 1, 0, 0), Is.is(input));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class ListUtilsTest {
         List<Integer> input = new ArrayList<>(Arrays.asList(0, 1, 2));
         ListUtils.addAfter(input, 2, 3);
         ListUtils.replaceIf(input, obj -> obj % 2 == 0, 4);
-        assertThat(Arrays.asList(4, 1, 4 , 3), Is.is(input));
+        assertThat(Arrays.asList(4, 1, 4, 3), Is.is(input));
     }
 
     @Test
