@@ -8,16 +8,10 @@ public class SimpleQueue<T> {
 
     public T poll() {
         if (outCount == 0) {
-            for (int i = 0; i <= inCount; i++) {
-                if (outCount <= inCount) {
-                    out.push(in.pop());
-                    outCount++;
-                    inCount--;
-                } else {
-                    in.push(out.pop());
-                    inCount++;
-                    outCount--;
-                }
+            while (inCount > 0) {
+                out.push(in.pop());
+                inCount--;
+                outCount++;
             }
         }
         outCount--;
