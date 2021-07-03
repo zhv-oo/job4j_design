@@ -7,17 +7,20 @@ public class SimpleQueue<T> {
     private int inCount = 0;
 
     public T poll() {
-        for (int i = 0; i <= inCount; i++) {
-            if (outCount <= inCount) {
-                out.push(in.pop());
-                outCount++;
-                inCount--;
-            } else {
-                in.push(out.pop());
-                inCount++;
-                outCount--;
+        if (outCount == 0) {
+            for (int i = 0; i <= inCount; i++) {
+                if (outCount <= inCount) {
+                    out.push(in.pop());
+                    outCount++;
+                    inCount--;
+                } else {
+                    in.push(out.pop());
+                    inCount++;
+                    outCount--;
+                }
             }
         }
+        outCount--;
         return out.pop();
     }
 
