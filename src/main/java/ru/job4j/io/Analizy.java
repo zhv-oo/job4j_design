@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Analizy {
-    static public void unavailable(String source, String target) {
+    public void unavailable(String source, String target) {
         List<String> tmpList = new ArrayList<>();
         try (BufferedReader line = new BufferedReader(new FileReader(source))) {
             tmpList = line.lines().collect(Collectors.toList());
@@ -34,6 +34,6 @@ public class Analizy {
     }
 
     public static void main(String[] args) {
-        unavailable("./data/server.log", "./data/unavailable.csv");
+      //  Analizy.unavailable("./data/server.log", "./data/unavailable.csv");
     }
 }
