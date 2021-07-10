@@ -20,7 +20,7 @@ public class Config {
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             this.values = read.lines()
-                    .filter(obj -> obj.contains("="))
+                    .filter(obj -> !obj.startsWith("#") && obj.contains("="))
                     .map(obj -> obj.split("="))
                     .collect(Collectors.toMap(p -> p[0], p -> p[1]));
         } catch (Exception e) {
