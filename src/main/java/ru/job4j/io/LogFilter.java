@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LogFilter {
-    public static List<String> filter(String file, String filter) {
+    private final static String ERROR_CODE = "404";
+
+    public static List<String> filter(String file) {
         List<String> rsl = new ArrayList<>();
-        try (BufferedReader in = new BufferedReader(new FileReader("log.txt"))) {
+        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
-               if (List.of(line.split(" ")).contains(filter)) {
-                  rsl.add(line);
-               }
+                String[] tmp = line.split(" ");
+                if (tmp[tmp.length - 2].equals(ERROR_CODE)) {
+                    rsl.add(line);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -33,7 +36,7 @@ public class LogFilter {
     }
 
     public static void main(String[] args) {
-        List<String> log = filter("log.txt", "404");
+        List<String> log = filter("log.txt");
         log.forEach(System.out::println);
         save(log, "404.txt");
     }
