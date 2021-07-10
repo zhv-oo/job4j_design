@@ -16,7 +16,7 @@ public class AnalizyTest {
 
     @Test
     public void whenOneOfflinePeriod() throws IOException {
-        Analizy analizy= new Analizy();
+        Analizy analizy = new Analizy();
         List<String> list = List.of("200 10:56:01",
                 "500 10:57:01",
                 "400 10:58:01",
@@ -40,7 +40,7 @@ public class AnalizyTest {
 
     @Test
     public void whenAnyOfflinePeriod() throws IOException {
-        Analizy analizy= new Analizy();
+        Analizy analizy = new Analizy();
         List<String> list = List.of("200 10:56:01",
                 "500 10:57:01",
                 "400 10:58:01",
