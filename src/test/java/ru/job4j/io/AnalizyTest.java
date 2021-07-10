@@ -26,9 +26,7 @@ public class AnalizyTest {
         File source = folder.newFile("source.txt");
         File target = folder.newFile("target.txt");
         try (PrintWriter out = new PrintWriter(source)) {
-            for (String s : list) {
-                out.println(s);
-            }
+            list.forEach(out::println);
         }
         analizy.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         StringBuilder rsl = new StringBuilder();
@@ -50,9 +48,7 @@ public class AnalizyTest {
         File source = folder.newFile("source.txt");
         File target = folder.newFile("target.txt");
         try (PrintWriter out = new PrintWriter(source)) {
-            for (String s : list) {
-                out.println(s);
-            }
+            list.forEach(out::println);
         }
         analizy.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         StringBuilder rsl = new StringBuilder();
