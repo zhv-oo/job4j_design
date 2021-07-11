@@ -11,13 +11,16 @@ public class Config {
 
     private final String path;
     private Map<String, String> values = new HashMap<>();
+    private String key = "";
 
     public Config(final String path) {
         this.path = path;
-        load();
     }
 
     public void load() {
+        if (key.contains("=")) {
+            throw new IllegalArgumentException();
+        }
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             this.values = read.lines()
                     .filter(obj -> !obj.startsWith("#") && obj.contains("="))
@@ -29,9 +32,8 @@ public class Config {
     }
 
     public String value(String key) {
-        if (key.contains("=")) {
-            throw new IllegalArgumentException();
-        }
+        this.key = key;
+        load();
         return this.values.get(key);
     }
 
