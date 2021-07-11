@@ -37,7 +37,7 @@ public class ConfigTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenFalseKey() {
-        String path = "./app.properties";
+        String path = "./data/appTest.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("hibernate.connection.password="), is("password"));

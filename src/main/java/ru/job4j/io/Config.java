@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -23,17 +24,21 @@ public class Config {
         }
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             this.values = read.lines()
-                    .filter(obj -> !obj.startsWith("#") && obj.contains("="))
+                    .filter(obj -> !obj.startsWith("#") && !obj.isEmpty())
                     .map(obj -> obj.split("="))
+                    .filter(obj -> {
+                        if (obj.length != 2) {
+                            throw new IllegalArgumentException();
+                        }
+                        return true;
+                    })
                     .collect(Collectors.toMap(p -> p[0], p -> p[1]));
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public String value(String key) {
-        this.key = key;
-        load();
         return this.values.get(key);
     }
 
@@ -49,6 +54,6 @@ public class Config {
     }
 
     public static void main(String[] args) {
-           System.out.println(new Config("app.properties"));
+        System.out.println(new Config("app.properties"));
     }
 }
