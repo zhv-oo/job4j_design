@@ -18,7 +18,6 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         if (!filesMap.containsKey(prFile)) {
             filesMap.put(prFile, file.toAbsolutePath());
         } else {
-            listDouble.add(filesMap.get(prFile));
             listDouble.add(file.toAbsolutePath());
         }
 
