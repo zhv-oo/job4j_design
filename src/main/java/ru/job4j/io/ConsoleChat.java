@@ -31,19 +31,14 @@ public class ConsoleChat {
             } else if (!inLine.equals(CONTINUE) && chkPhrase.equals(STOP)) {
                 out.add(inLine);
             } else if (!inLine.equals(OUT)) {
-                String rndAnswer = answerList.get((int) (Math.random() * answerList.size() - 1));
+                String rndAnswer = answerList.get((int) (Math.random() * answerList.size()));
                 System.out.println(rndAnswer);
                 out.add(inLine);
                 out.add(rndAnswer);
                 chkPhrase = "";
             }
         }
-        try (PrintWriter pw = new PrintWriter(
-                new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
-            out.forEach(pw::println);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.writeFile(out);
     }
 
     public static void main(String[] args) {
@@ -54,6 +49,15 @@ public class ConsoleChat {
     private void readFile() {
         try (BufferedReader br = new BufferedReader(new FileReader(botAnswers,  Charset.forName("WINDOWS-1251")))) {
             br.lines().forEach(answerList::add);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeFile(List<String> out) {
+        try (PrintWriter pw = new PrintWriter(
+                new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
+            out.forEach(pw::println);
         } catch (IOException e) {
             e.printStackTrace();
         }
