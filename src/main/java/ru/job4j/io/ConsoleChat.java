@@ -1,5 +1,9 @@
 package ru.job4j.io;
 
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
@@ -11,6 +15,7 @@ public class ConsoleChat {
     private static final String STOP = "стоп";
     private static final String CONTINUE = "продолжить";
     private final List<String> answerList = new ArrayList<>();
+    private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
@@ -41,16 +46,12 @@ public class ConsoleChat {
         this.writeFile(out);
     }
 
-    public static void main(String[] args) {
-        ConsoleChat cc = new ConsoleChat("./data/logChat.txt", "./data/answer.txt");
-        cc.run();
-    }
-
     private void readFile() {
         try (BufferedReader br = new BufferedReader(new FileReader(botAnswers,  Charset.forName("WINDOWS-1251")))) {
             br.lines().forEach(answerList::add);
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            LOG.error("Exception:", e);
         }
     }
 
@@ -59,7 +60,14 @@ public class ConsoleChat {
                 new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
             out.forEach(pw::println);
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            LOG.error("Exception:", e);
         }
+    }
+
+    public static void main(String[] args) {
+        BasicConfigurator.configure();
+        ConsoleChat cc = new ConsoleChat("./data/logChat.txt", "./data/answer.txt");
+        cc.run();
     }
 }
