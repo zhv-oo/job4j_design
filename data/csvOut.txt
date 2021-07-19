@@ -1,2 +1,2 @@
-Ivan 23 yes 
+Ivan 23 yes
 Fedr 27 no 
