@@ -50,7 +50,6 @@ public class ConsoleChat {
         try (BufferedReader br = new BufferedReader(new FileReader(botAnswers,  Charset.forName("WINDOWS-1251")))) {
             br.lines().forEach(answerList::add);
         } catch (IOException e) {
-            //e.printStackTrace();
             LOG.error("Exception:", e);
         }
     }
@@ -60,13 +59,11 @@ public class ConsoleChat {
                 new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
             out.forEach(pw::println);
         } catch (IOException e) {
-            //e.printStackTrace();
             LOG.error("Exception:", e);
         }
     }
 
     public static void main(String[] args) {
-        BasicConfigurator.configure();
         ConsoleChat cc = new ConsoleChat("./data/logChat.txt", "./data/answer.txt");
         cc.run();
     }

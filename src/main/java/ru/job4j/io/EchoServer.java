@@ -12,8 +12,7 @@ public class EchoServer {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public static void main(String[] args) {
-        BasicConfigurator.configure();
-        try (ServerSocket server = new ServerSocket(9000)) {
+        try (ServerSocket server = new ServerSocket(80)) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
                 try (OutputStream out = socket.getOutputStream();
