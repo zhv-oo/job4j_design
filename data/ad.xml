@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<ad number="875" name="tv">
+    <contact phone="+79007771111"/>
+    <active>true</active>
+    <groups>
+        <group>tv</group>
+        <group>secondHand</group>
+    </groups>
+</ad>
