@@ -1,14 +1,29 @@
 package ru.job4j.serialization.xml;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.*;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.Arrays;
 
+@XmlRootElement(name = "ad")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Ad {
-    private final String name;
-    private final int number;
-    private final Contact contact;
-    private final boolean active;
-    private final String[] group;
+    @XmlAttribute
+    private String name;
+    @XmlAttribute
+    private int number;
+    private Contact contact;
+    private boolean active;
+    @XmlElementWrapper(name = "groups")
+    @XmlElement(name = "group")
+    private String[] group;
 
+    public Ad() {
+    }
 
     public Ad(String name, Integer number, Contact contact, boolean active, String[] group) {
         this.name = name;
@@ -29,9 +44,22 @@ public class Ad {
                 + '}';
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         final Ad ad = new Ad("Tv", 875, new Contact("+79007771111"), true,
                 new String[]{"tv", "secondHand"});
-        System.out.println(ad);
+        JAXBContext context = JAXBContext.newInstance(Ad.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        String xml = "";
+        try (StringWriter writer = new StringWriter()) {
+            marshaller.marshal(ad, writer);
+            xml = writer.getBuffer().toString();
+            System.out.println(xml);
+        }
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        try (StringReader reader = new StringReader(xml)) {
+            Ad result = (Ad) unmarshaller.unmarshal(reader);
+            System.out.println(result);
+        }
     }
 }
