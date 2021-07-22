@@ -1,0 +1,34 @@
+package ru.job4j.finder;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class GetArgs {
+
+    private final Map<String, String> values = new HashMap<>();
+    private static final String RG_SPLIT = "=";
+    private static final String RG_START = "-";
+
+    public String get(String key) {
+        if (!values.containsKey(key)) {
+            throw new IllegalArgumentException();
+        }
+        return values.get(key);
+    }
+
+    private void parse(String[] args) {
+        for (String arg : args) {
+            String[] tmp = arg.split(RG_SPLIT);
+            if (tmp.length != 2) {
+                throw new IllegalArgumentException();
+            }
+            values.put(tmp[0].replaceFirst(RG_START, ""), tmp[1]);
+        }
+    }
+
+    public static GetArgs of(String[] args) {
+        GetArgs names = new GetArgs();
+        names.parse(args);
+        return names;
+    }
+}
