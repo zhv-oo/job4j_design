@@ -2,6 +2,7 @@ package ru.job4j.serialization.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -53,6 +54,14 @@ public class Computer {
                         + "[\"Sale\",\"30%\"]"
                         + "}";
         final Computer pcMod = gson.fromJson(pcJson, Computer.class);
-        System.out.println(pcMod);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("cpu", pcMod.cpu);
+        jsonObject.put("core", pcMod.core);
+        jsonObject.put("server", pcMod.server);
+        jsonObject.put("buyer", pcMod.buyer);
+        jsonObject.put("statuses", pcMod.statuses);
+
+        System.out.println(jsonObject.toString());
     }
 }
