@@ -1,0 +1,13 @@
+create table pc(
+	id serial primary key,
+	activ boolean,
+	name text,
+	price integer,
+	count integer
+);
+insert into pc (activ, name, price, count) values (true, 'WorkStation', 350, 4);
+update pc set activ = false, count = 0;
+insert into pc (activ, name, price, count) values (false, 'HomeStation', 450, 0);
+delete from pc where name = 'HomeStation';
+update pc set activ = true, count = 3;
+select * from pc;
