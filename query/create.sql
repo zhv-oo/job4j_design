@@ -28,6 +28,7 @@ create table category(
 create table item(
 	id serial primary key,
 	name text,
+	category_id int references category(id),
 	users_id int references users(id),
 	state_id int references state(id)
 );
