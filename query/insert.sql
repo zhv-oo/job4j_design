@@ -1,0 +1,11 @@
+insert into role (name) values ('admin');
+insert into role (name) values ('user');
+insert into rules (name) values ('superuser');
+insert into rules (name) values ('operator');
+insert into levelAccept (role_id, rules_id) values (1,1);
+insert into users (name, levelAccept_id) values ('Admin', 1);
+insert into state (state) values ('activ');
+insert into category (category) values ('today');
+insert into item (name, users_id, state_id) values ('error in module', 1, 1);
+insert into comments (comment, item_id) values ('in progress', 1);
+insert into attache (file, item_id) values (null, 1);
