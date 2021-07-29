@@ -64,3 +64,8 @@ from product as s
 join type ss on s.type_id = ss.id
 group by ss.name
 HAVING  count(s.id) >= 2;
+
+select s.name as Продукт, ss.name as Тип
+from product as s
+join type ss on s.type_id = ss.id
+group by s.name, ss.name;
