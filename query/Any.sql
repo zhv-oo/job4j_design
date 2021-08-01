@@ -40,14 +40,13 @@ where s.name like 'Буратино';
 select s.name as Продукт
 from product as s
 join type ss on s.type_id = ss.id
-where s.expired_date < '01.01.2021';
+where s.expired_date > current_date;
 
-select ss.name as Тип, s.name as Тип, max(s.price) as Цена
+select ss.name as Тип, s.name as Продукт, s.price as Цена
 from product as s
 join type ss on s.type_id = ss.id
 group by s.name, ss.name, s.price
-order by s.price desc
-limit 1;
+HAVING s.price >= (SELECT max(price) FROM product);
 
 select s.name as Продукт
 from product as s
