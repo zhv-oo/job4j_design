@@ -40,7 +40,7 @@ where s.name like 'Буратино';
 select s.name as Продукт
 from product as s
 join type ss on s.type_id = ss.id
-where s.expired_date > current_date;
+where s.expired_date < current_date;
 
 select ss.name as Тип, s.name as Продукт, s.price as Цена
 from product as s
