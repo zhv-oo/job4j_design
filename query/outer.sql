@@ -44,13 +44,13 @@ insert into engine (name) values ('3,5');
 insert into gear (name) values ('Селектроная');
 
 select b.name as Кузов from body as b
-full outer join car c on c.body_id = b.id
-where (b.id) is distinct from (c.body_id);
+left join car c on c.body_id = b.id
+where c.body_id is null;
 
 select e.name as Двигатель from engine as e
 full outer join car c on c.engine_id = e.id
-where (e.id) is distinct from (c.engine_id);
+where c.engine_id is null;
 
 select g.name as "Коробка передач" from gear as g
 full outer join car c on c.gear_id = g.id
-where (g.id) is distinct from (c.gear_id);
+where c.gear_id is null;
