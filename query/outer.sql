@@ -48,9 +48,9 @@ left join car c on c.body_id = b.id
 where c.body_id is null;
 
 select e.name as Двигатель from engine as e
-full outer join car c on c.engine_id = e.id
+left join car c on c.engine_id = e.id
 where c.engine_id is null;
 
 select g.name as "Коробка передач" from gear as g
-full outer join car c on c.gear_id = g.id
+left join car c on c.gear_id = g.id
 where c.gear_id is null;
