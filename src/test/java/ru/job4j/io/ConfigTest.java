@@ -26,15 +26,6 @@ public class ConfigTest {
         assertThat(config.value("server"), is(Matchers.nullValue()));
     }
 
-    @Test
-    public void whenMainConfig() {
-        String path = "./app.properties";
-        Config config = new Config(path);
-        config.load();
-        assertThat(config.value("hibernate.connection.password"), is("password"));
-        assertThat(config.value("password"), is(Matchers.nullValue()));
-    }
-
     @Test(expected = IllegalArgumentException.class)
     public void whenFalseKey() {
         String path = "./data/appTest.properties";
