@@ -39,12 +39,12 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void addColumn(String tableName, String columnName, String type) throws SQLException {
-            String sql = "ALTER TABLE " + tableName + "ADD " + columnName + " text;";
+            String sql = "ALTER TABLE " + tableName + "ADD " + columnName + type + ";";
             this.execQuery(sql);
     }
 
     public void dropColumn(String tableName, String columnName) throws SQLException {
-            String sql = "ALTER TABLE " + tableName + "DROP " + columnName + " text;";
+            String sql = "ALTER TABLE " + tableName + "DROP " + columnName + ";";
             this.execQuery(sql);
     }
 
