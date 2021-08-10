@@ -14,9 +14,6 @@ public class StatementDemo {
         String url = config.value("url");
         String login = config.value("username");
         String password = config.value("password");
-//        String url = "jdbc:postgresql://localhost:5432/idea_db";
-//        String login = "postgres";
-//        String password = "password";
         return DriverManager.getConnection(url, login, password);
     }
 

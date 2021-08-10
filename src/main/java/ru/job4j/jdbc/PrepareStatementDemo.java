@@ -16,9 +16,6 @@ public class PrepareStatementDemo {
 
     public void initConnection() throws Exception {
         Class.forName("org.postgresql.Driver");
-//        String url = "jdbc:postgresql://localhost:5432/idea_db";
-//        String login = "postgres";
-//        String password = "password";
         Config config = new Config("app.properties");
         config.load();
         String url = config.value("url");
