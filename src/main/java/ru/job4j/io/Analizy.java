@@ -28,6 +28,9 @@ public class Analizy {
     }
 
     public static void main(String[] args) {
-        //  Analizy.unavailable("./data/server.log", "./data/unavailable.csv");
+        /**
+         * Для теста в метод main добавить.
+         *  Analizy.unavailable("./data/server.log", "./data/unavailable.csv");
+         */
     }
 }
