@@ -20,7 +20,7 @@ public class User {
 
     }
 
-    static class washCar {
+    static class WashCar {
         void washACar() {
             Car car = new Car();
         }
