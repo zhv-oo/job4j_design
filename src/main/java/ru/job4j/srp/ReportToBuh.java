@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 public class ReportToBuh implements Report {
 
     private Store store;
+    private static final int DOLLAR_PER_ROUBLE = 72;
 
     public ReportToBuh(Store store) {
         this.store = store;
@@ -25,7 +26,7 @@ public class ReportToBuh implements Report {
             text.append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append(employee.getSalary() * 72).append(";")
+                    .append(employee.getSalary() / DOLLAR_PER_ROUBLE).append(";")
                     .append(System.lineSeparator());
         }
         return text.toString();
