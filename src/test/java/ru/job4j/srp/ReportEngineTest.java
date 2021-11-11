@@ -1,9 +1,17 @@
 package ru.job4j.srp;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
+
+import com.google.gson.GsonBuilder;
 import org.junit.Test;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class ReportEngineTest {
 
@@ -87,5 +95,57 @@ public class ReportEngineTest {
                 .append(workerTwo.getSalary()).append(";")
                 .append(System.lineSeparator());
         assertThat(engine.generate(em -> true), is(expect.toString()));
+    }
+
+    /**
+     * Тест формирования отчета в Json.
+     */
+    @Test
+    public void whenGenerateToJson() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
+        Report engine = new ReportToJson(store);
+        String res = "{\"employees\":[{\"name\":\"Ivan\",\"hired\":{\"year\":2021,\"month\":10,\"dayOfMonth\":11,\"hourOfDay\":21,\"minute\":"
+                + now.getTime().getMinutes() + ",\"second\":"
+                + now.getTime().getSeconds() + "},\"fired\":{\"year\":2021,\"month\":10,\"dayOfMonth\":11,\"hourOfDay\":21,\"minute\":"
+                + now.getTime().getMinutes() + ",\"second\":"
+                + now.getTime().getSeconds() + "},\"salary\":100.0}]}";
+        assertEquals(engine.generate(em -> true), res);
+    }
+
+    /**
+     * Тест формирования отчета в XML.
+     */
+    @Test
+    public void whenGenerateToXml() throws DatatypeConfigurationException {
+        StringBuilder text = new StringBuilder();
+        MemStore store = new MemStore();
+        Calendar now = GregorianCalendar.getInstance();
+        XMLGregorianCalendar testDate = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) now);
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
+        Report engine = new ReportToXml(store);
+            text
+                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
+                .append(System.lineSeparator())
+                .append("<users>")
+                .append(System.lineSeparator())
+                .append("    <users>")
+                .append(System.lineSeparator())
+                .append("        <fired>" + testDate + "</fired>")
+                .append(System.lineSeparator())
+                .append("        <hired>" + testDate + "</hired>")
+                .append(System.lineSeparator())
+                .append("        <name>Ivan</name>")
+                .append(System.lineSeparator())
+                .append("        <salary>100.0</salary>")
+                .append(System.lineSeparator())
+                .append("    </users>")
+                .append(System.lineSeparator())
+                .append("</users>")
+                .append(System.lineSeparator());
+        assertEquals(engine.generate(em -> true), text.toString());
     }
 }
