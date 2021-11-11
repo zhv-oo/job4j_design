@@ -107,9 +107,11 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportToJson(store);
-        String res = "{\"employees\":[{\"name\":\"Ivan\",\"hired\":{\"year\":2021,\"month\":10,\"dayOfMonth\":11,\"hourOfDay\":21,\"minute\":"
+        String res = "{\"employees\":[{\"name\":\"Ivan\",\"hired\":{\"year\":2021,\"month\":10,\"dayOfMonth\":11,\"hourOfDay\":"
+                + now.get(Calendar.HOUR_OF_DAY) +",\"minute\":"
                 + now.get(Calendar.MINUTE) + ",\"second\":"
-                + now.get(Calendar.SECOND) + "},\"fired\":{\"year\":2021,\"month\":10,\"dayOfMonth\":11,\"hourOfDay\":21,\"minute\":"
+                + now.get(Calendar.SECOND) + "},\"fired\":{\"year\":2021,\"month\":10,\"dayOfMonth\":11,\"hourOfDay\":"+
+                + now.get(Calendar.HOUR_OF_DAY) +",\"minute\":"
                 + now.get(Calendar.MINUTE) + ",\"second\":"
                 + now.get(Calendar.SECOND) + "},\"salary\":100.0}]}";
         assertEquals(engine.generate(em -> true), res);
