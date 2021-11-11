@@ -107,11 +107,19 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportToJson(store);
-        String res = "{\"employees\":[{\"name\":\"Ivan\",\"hired\":{\"year\":2021,\"month\":10,\"dayOfMonth\":11,\"hourOfDay\":21,\"minute\":"
-                + now.getTime().getMinutes() + ",\"second\":"
-                + now.getTime().getSeconds() + "},\"fired\":{\"year\":2021,\"month\":10,\"dayOfMonth\":11,\"hourOfDay\":21,\"minute\":"
-                + now.getTime().getMinutes() + ",\"second\":"
-                + now.getTime().getSeconds() + "},\"salary\":100.0}]}";
+        String res = "{\"employees\":[{\"name\":\"Ivan\",\"hired\":{\"year\":"
+                + now.get(Calendar.YEAR) + ",\"month\":"
+                + now.get(Calendar.MONTH) + ",\"dayOfMonth\":"
+                + now.get(Calendar.DAY_OF_MONTH) + ",\"hourOfDay\":"
+                + now.get(Calendar.HOUR_OF_DAY) + ",\"minute\":"
+                + now.get(Calendar.MINUTE) + ",\"second\":"
+                + now.get(Calendar.SECOND) + "},\"fired\":{\"year\":"
+                + now.get(Calendar.YEAR) + ",\"month\":"
+                + now.get(Calendar.MONTH) + ",\"dayOfMonth\":"
+                + now.get(Calendar.DAY_OF_MONTH) + ",\"hourOfDay\":"
+                + now.get(Calendar.HOUR_OF_DAY) + ",\"minute\":"
+                + now.get(Calendar.MINUTE) + ",\"second\":"
+                + now.get(Calendar.SECOND) + "},\"salary\":100.0}]}";
         assertEquals(engine.generate(em -> true), res);
     }
 
