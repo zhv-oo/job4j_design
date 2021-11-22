@@ -1,57 +1,26 @@
 package ru.job4j.lsp;
 
-import java.util.Date;
+import java.util.List;
+
 /**
  * \* User: zhv
- * \* Date: 21.11.2021
- * \* Time: 18:11
+ * \* Date: 22.11.2021
+ * \* Time: 19:30
  * \* Description: Класс контроля и распределения продуктов по складам.
  * \
  */
 public class ControllQuality {
-    Storage storage;
-    Storage warehouse = new Warehouse();
-    Storage shop = new Shop();
-    Storage trash = new Trash();
+    List<Storage> storage;
 
-    private void setStorage(Storage storage) {
+    public ControllQuality(List<Storage> storage) {
         this.storage = storage;
     }
 
-    public void checkFood(Food food, Date nowDate) {
-        int chk = getPercent(food.expiry(), nowDate, food.getCreateDate());
-        if (chk >= 75) {
-            setStorage(warehouse);
-            storage.add(food);
-        } else if (chk > 25) {
-            setStorage(shop);
-            storage.add(food);
-        } else if (chk < 25 && chk > 0) {
-            food.setDiscount(25.0);
-            setStorage(shop);
-            storage.add(food);
-        } else if (chk <= 0) {
-            setStorage(trash);
-            storage.add(food);
+    public void distribute(Food food) {
+        for (Storage store : storage) {
+            if (store.accept(food)) {
+                store.add(food);
+            }
         }
-    }
-
-    public Integer sizeWarehouse() {
-        setStorage(warehouse);
-        return storage.getSize();
-    }
-
-    public Integer sizeShop() {
-        setStorage(shop);
-        return storage.getSize();
-    }
-
-    public Integer sizeTrash() {
-        setStorage(trash);
-        return storage.getSize();
-    }
-
-    private static Integer getPercent(Long exp, Date nwDate, Date create) {
-        return 100 - Math.toIntExact((nwDate.getTime() - create.getTime()) * 100 / exp);
     }
 }

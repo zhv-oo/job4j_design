@@ -18,8 +18,17 @@ public class Warehouse implements Storage {
     }
 
     @Override
-    public void add(Food food) {
-        warehouse.add(food);
+    public boolean add(Food food) {
+        boolean res = accept(food);
+        if (res) {
+            warehouse.add(food);
+        }
+        return res;
+    }
+
+    @Override
+    public boolean accept(Food food) {
+        return 75.0 <= new Warehouse().getExpirationPercent(food);
     }
 
     public Integer getSize() {

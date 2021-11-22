@@ -10,7 +10,7 @@ import java.util.Date;
  * \
  */
 
-public class Food {
+abstract public class Food {
     private String name;
     private final Date expiryDate;
     private final Date createDate;
@@ -43,6 +43,10 @@ public class Food {
 
     public void setDiscount(Double discount) {
         this.discount = discount;
+    }
+
+    public Double getDiscount() {
+        return discount;
     }
 
     /**

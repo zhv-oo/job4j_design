@@ -17,8 +17,17 @@ public class Trash implements Storage {
     }
 
     @Override
-    public void add(Food food) {
-        trash.add(food);
+    public boolean add(Food food) {
+        boolean res = accept(food);
+        if (res) {
+            trash.add(food);
+        }
+        return res;
+    }
+
+    @Override
+    public boolean accept(Food food) {
+        return new Shop().getExpirationPercent(food) <= 0.0;
     }
 
     public Integer getSize() {
