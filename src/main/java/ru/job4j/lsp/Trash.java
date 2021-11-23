@@ -27,7 +27,7 @@ public class Trash implements Storage {
 
     @Override
     public boolean accept(Food food) {
-        return new Shop().getExpirationPercent(food) <= 0.0;
+        return getExpirationPercent(food) <= 0.0;
     }
 
     public Integer getSize() {

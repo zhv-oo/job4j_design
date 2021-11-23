@@ -19,7 +19,7 @@ public class Shop implements Storage {
 
     @Override
     public boolean add(Food food) {
-        double percent = new Shop().getExpirationPercent(food);
+        double percent = getExpirationPercent(food);
         boolean res = accept(food);
         boolean setDiscount = percent <= 25 && percent > 0;
         if (setDiscount) {
@@ -31,7 +31,7 @@ public class Shop implements Storage {
 
     @Override
     public boolean accept(Food food) {
-        double res = new Shop().getExpirationPercent(food);
+        double res = getExpirationPercent(food);
         return 75.0 > res && res > 0.0;
     }
 

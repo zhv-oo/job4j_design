@@ -28,7 +28,7 @@ public class Warehouse implements Storage {
 
     @Override
     public boolean accept(Food food) {
-        return 75.0 <= new Warehouse().getExpirationPercent(food);
+        return 75.0 <= getExpirationPercent(food);
     }
 
     public Integer getSize() {
