@@ -8,5 +8,5 @@ package ru.job4j.lsp.parking;
  * \
  */
 interface CarParking {
-    boolean parkingCar(Car car, Park park);
+    boolean parkingCar(Car car);
 }
