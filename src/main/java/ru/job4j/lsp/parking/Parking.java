@@ -1,8 +1,8 @@
 package ru.job4j.lsp.parking;
 
 public class Parking implements CarParking {
-    private final int carCell;
-    private final int truckCell;
+    private int carCell;
+    private int truckCell;
 
     public Parking(int carCell, int truckCell) {
         this.carCell = carCell;
@@ -11,12 +11,16 @@ public class Parking implements CarParking {
 
     @Override
     public boolean parkingCar(Car car) {
-        boolean res;
+        boolean res = true;
         int carSize = car.getCarSize();
-        if (carSize == 1) {
-            res = carCell >= carSize;
+        if (carSize == 1 && carSize <= carCell) {
+            carCell--;
+        } else if (carCell >= carSize && truckCell == 0) {
+            carCell -= carSize;
+        } else if (truckCell != 0 && carSize > 1) {
+            truckCell--;
         } else {
-            res = truckCell >= carSize;
+            res = false;
         }
         return res;
     }

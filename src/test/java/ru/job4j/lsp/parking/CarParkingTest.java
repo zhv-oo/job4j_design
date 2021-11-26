@@ -14,8 +14,17 @@ public class CarParkingTest {
 
     @Test
     public void whenCanTruckPark() {
-        CarParking carParking = new Parking(1, 3);
+        CarParking carParking = new Parking(1, 1);
         Car truck = new Truck(3);
+        assertTrue(carParking.parkingCar(truck));
+    }
+
+    @Test
+    public void whenCanTruckParkInPass() {
+        CarParking carParking = new Parking(6, 0);
+        Car truck = new Truck(4);
+        carParking.parkingCar(new PassCar());
+        carParking.parkingCar(new PassCar());
         assertTrue(carParking.parkingCar(truck));
     }
 
