@@ -9,4 +9,5 @@ package ru.job4j.lsp.parking;
  */
 interface CarParking {
     boolean parkingCar(Car car);
+    Car getCar(Integer pos);
 }

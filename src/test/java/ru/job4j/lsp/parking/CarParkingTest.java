@@ -44,4 +44,32 @@ public class CarParkingTest {
         Car truck = new Truck(3);
         assertFalse(carParking.parkingCar(truck));
     }
+
+    @Test
+    public void whenCanTruckAndPAssPark() {
+        CarParking carParking = new Parking(7, 0);
+        Car truck = new Truck(4);
+        carParking.parkingCar(new PassCar());
+        carParking.parkingCar(new PassCar());
+        assertTrue(carParking.parkingCar(truck));
+        assertTrue(carParking.parkingCar(new PassCar()));
+        assertFalse(carParking.parkingCar(new PassCar()));
+    }
+
+    @Test
+    public void whenCanTruckOn4Cell() {
+        CarParking carParking = new Parking(7, 0);
+        Car truck = new Truck(4);
+        carParking.parkingCar(new PassCar());
+        carParking.parkingCar(new PassCar());
+        assertTrue(carParking.parkingCar(truck));
+        carParking.parkingCar(new PassCar());
+        assertNotEquals(truck, carParking.getCar(1));
+        assertEquals(truck, carParking.getCar(2));
+        assertEquals(truck, carParking.getCar(3));
+        assertEquals(truck, carParking.getCar(4));
+        assertEquals(truck, carParking.getCar(5));
+        assertNotEquals(truck, carParking.getCar(6));
+
+    }
 }

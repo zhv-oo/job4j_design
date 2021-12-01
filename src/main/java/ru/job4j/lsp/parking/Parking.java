@@ -1,15 +1,15 @@
 package ru.job4j.lsp.parking;
 
 public class Parking implements CarParking {
+    private final Car[] cars;
     private int carCell;
     private int truckCell;
-    private int truckPos;
-    private final Car[] cars;
+    private int passCount = 0;
+    private int truckCount = 0;
 
     public Parking(int carCell, int truckCell) {
         this.carCell = carCell;
         this.truckCell = truckCell;
-        this.truckPos = carCell + truckCell - 1;
         this.cars = new Car[carCell + truckCell];
     }
 
@@ -17,18 +17,24 @@ public class Parking implements CarParking {
     public boolean parkingCar(Car car) {
         boolean res = true;
         int carSize = car.getCarSize();
-        if (carSize == 1 && carSize <= carCell) {
-            cars[carCell - 1] = car;
-            carCell--;
-        } else if (carCell >= carSize && truckCell == 0) {
-            cars[carCell - 1] = car;
-            carCell -= carSize;
-        } else if (truckCell != 0 && carSize > 1) {
-            cars[truckPos--] = car;
-            truckCell--;
+        if (carSize == 1 && passCount < carCell) {
+            cars[passCount++] = car;
+        } else if (carCell - passCount >= carSize && truckCount == truckCell) {
+            int i = 0;
+            while (i != carSize) {
+                cars[passCount++] = car;
+                i++;
+            }
+        } else if (truckCount != truckCell && carSize > 1) {
+            cars[truckCount++] = car;
         } else {
             res = false;
         }
         return res;
+    }
+
+    @Override
+    public Car getCar(Integer pos) {
+        return cars[pos];
     }
 }
